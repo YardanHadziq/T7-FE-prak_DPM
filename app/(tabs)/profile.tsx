@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Image, View} from 'react-native';
 import {useRouter} from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
@@ -60,16 +60,18 @@ const ProfileScreen = () => {
         <PaperProvider>
             <ThemedView style={styles.container}>
                 {profile ? (
-                    <ThemedView>
-                        <ThemedText style={styles.title}>Profile</ThemedText>
-                        <ThemedText style={styles.label}>Username:</ThemedText>
-                        <ThemedText style={styles.value}>{profile.username}</ThemedText>
+                    <>
+                        <Image source={require('../../assets/images/icon.png')} style={styles.banner} />
+                        <View style={styles.profileInfoContainer}>
+                            <Image source={require('../../assets/images/react-logo.png')} style={styles.profileImage} />
+                            <ThemedText style={styles.username}>{profile.username}</ThemedText>
+                        </View>
                         <ThemedText style={styles.label}>Email:</ThemedText>
                         <ThemedText style={styles.value}>{profile.email}</ThemedText>
                         <Button mode="contained" onPress={handleLogout} style={styles.logoutButton}>
                             Log Out
                         </Button>
-                    </ThemedView>
+                    </>
                 ) : (
                     <ThemedText>No profile data available</ThemedText>
                 )}
@@ -93,28 +95,46 @@ const ProfileScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+        backgroundColor: '#15202b',
         padding: 16,
     },
-    title: {
-        fontSize: 24,
+    banner: {
+        width: '100%',
+        height: 150,
+        resizeMode: 'cover',
+        backgroundColor: '#192734',
+    },
+    profileInfoContainer: {
+        alignItems: 'center',
+        marginTop: -50,
+    },
+    profileImage: {
+        width: 100,
+        height: 100,
+        borderRadius: 50,
+        borderWidth: 4,
+        borderColor: '#15202b',
+        backgroundColor: '#ffffff',
+    },
+    username: {
+        fontSize: 20,
         fontWeight: 'bold',
-        marginBottom: 24,
-        color: '#333',
+        color: '#ffffff',
+        marginTop: 8,
     },
     label: {
         fontSize: 18,
         fontWeight: 'bold',
         marginTop: 16,
-        color: '#333',
+        color: '#8899a6',
     },
     value: {
         fontSize: 18,
-        color: '#666',
+        color: '#ffffff',
     },
     logoutButton: {
         marginTop: 24,
+        backgroundColor: '#1da1f2',
     },
 });
 

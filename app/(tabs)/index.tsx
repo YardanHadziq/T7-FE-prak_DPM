@@ -41,7 +41,7 @@ const TodosScreen = () => {
 
     const handleAddTodo = async () => {
         if (!title || !description) {
-            setDialogMessage('Both title and description are required.');
+            setDialogMessage('Both title and thread are required.');
             setDialogVisible(true);
             return;
         }
@@ -56,7 +56,7 @@ const TodosScreen = () => {
             setDescription('');
             setIsAdding(false);
         } catch (error) {
-            setDialogMessage('Failed to add todo');
+            setDialogMessage('Failed to add post');
             setDialogVisible(true);
         }
     };
@@ -67,7 +67,7 @@ const TodosScreen = () => {
             await axios.delete(`${API_URL}/api/todos/${id}`, {headers: {Authorization: `Bearer ${token}`}});
             fetchTodos();
         } catch (error) {
-            setDialogMessage('Failed to delete todo');
+            setDialogMessage('Failed to delete post');
             setDialogVisible(true);
         }
     };
@@ -75,9 +75,9 @@ const TodosScreen = () => {
     return (
         <PaperProvider>
             <ThemedView style={styles.container}>
-                <ThemedText style={styles.title} type="title">ToDo List</ThemedText>
+                <ThemedText style={styles.title} type="title">Switter</ThemedText>
                 {loading ? (
-                    <ActivityIndicator style={styles.loading} animating={true}/>
+                    <ActivityIndicator style={styles.loading} animating={true} color="#1DA1F2" />
                 ) : (
                     <FlatList
                         data={todos}
@@ -85,11 +85,11 @@ const TodosScreen = () => {
                         renderItem={({item}) => (
                             <Card style={styles.card} elevation={3} onPress={() => router.push(`../todo/${item._id}`)}>
                                 <Card.Content>
-                                    <Text variant="titleMedium">{item.title}</Text>
+                                    <Text variant="titleMedium" style={styles.cardTitle}>{item.title}</Text>
                                     <Text variant="bodyMedium" style={styles.description}>{item.description}</Text>
                                 </Card.Content>
                                 <Card.Actions>
-                                    <Button onPress={() => handleDeleteTodo(item._id)}>Delete</Button>
+                                    <Button textColor="#1DA1F2" onPress={() => handleDeleteTodo(item._id)}>Delete</Button>
                                 </Card.Actions>
                             </Card>
                         )}
@@ -100,15 +100,15 @@ const TodosScreen = () => {
                     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined}
                                           style={styles.inputContainer}>
                         <TextInput label="Title" value={title} onChangeText={setTitle} style={styles.input}
-                                   mode="outlined"/>
-                        <TextInput label="Description" value={description} onChangeText={setDescription}
-                                   style={styles.input} mode="outlined" multiline/>
-                        <Button mode="contained" onPress={handleAddTodo} style={styles.addButton}>Add Todo</Button>
-                        <Button onPress={() => setIsAdding(false)} style={styles.cancelButton}>Cancel</Button>
+                                   mode="outlined" outlineColor="#1DA1F2" activeOutlineColor="#1DA1F2" textColor="#FFFFFF" theme={{colors: {placeholder: '#657786', text: '#FFFFFF'}}}/>
+                        <TextInput label="Thread" value={description} onChangeText={setDescription}
+                                   style={styles.input} mode="outlined" outlineColor="#1DA1F2" activeOutlineColor="#1DA1F2" multiline textColor="#FFFFFF" theme={{colors: {placeholder: '#657786', text: '#FFFFFF'}}}/>
+                        <Button mode="contained" onPress={handleAddTodo} style={styles.addButton} buttonColor="#1DA1F2">Add Post</Button>
+                        <Button onPress={() => setIsAdding(false)} style={styles.cancelButton} textColor="#1DA1F2">Nevermind</Button>
                     </KeyboardAvoidingView>
                 )}
                 {!isAdding && (
-                    <FAB style={styles.fab} icon="plus" onPress={() => setIsAdding(true)} label="Add Todo"/>
+                    <FAB style={styles.fab} icon="plus" onPress={() => setIsAdding(true)} label="Add Post" color="white" style={{backgroundColor: '#1DA1F2'}}/>
                 )}
                 <Portal>
                     <Dialog visible={dialogVisible} onDismiss={() => setDialogVisible(false)}>
@@ -117,7 +117,7 @@ const TodosScreen = () => {
                             <Text>{dialogMessage}</Text>
                         </Dialog.Content>
                         <Dialog.Actions>
-                            <Button onPress={() => setDialogVisible(false)}>OK</Button>
+                            <Button textColor="#1DA1F2" onPress={() => setDialogVisible(false)}>OK</Button>
                         </Dialog.Actions>
                     </Dialog>
                 </Portal>
@@ -130,10 +130,13 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingTop: Constants.statusBarHeight,
+        backgroundColor: '#15202B',
     },
     title: {
         marginTop: 16,
         marginHorizontal: 16,
+        color: '#1DA1F2',
+        fontWeight: 'bold',
     },
     listContainer: {
         padding: 16,
@@ -141,21 +144,27 @@ const styles = StyleSheet.create({
     card: {
         marginBottom: 16,
         borderRadius: 8,
+        backgroundColor: '#192734',
+    },
+    cardTitle: {
+        color: '#FFFFFF',
     },
     description: {
         marginTop: 8,
-        color: 'gray',
+        color: '#8899A6',
     },
     fab: {
         position: 'absolute',
         right: 16,
         bottom: 16,
+        backgroundColor: '#1DA1F2',
     },
     inputContainer: {
         padding: 16,
         borderTopLeftRadius: 16,
         borderTopRightRadius: 16,
         elevation: 5,
+        backgroundColor: '#192734',
     },
     input: {
         marginBottom: 12,

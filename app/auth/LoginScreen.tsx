@@ -20,6 +20,7 @@ export default function LoginScreen() {
             const response = await axios.post(`${API_URL}/api/auth/login`, { username, password });
             const { token } = response.data.data;
             await AsyncStorage.setItem("token", token);
+            router.replace("/(tabs)");
             setDialogMessage("Login successful!");
             setIsSuccess(true);
             setDialogVisible(true);
@@ -41,12 +42,13 @@ export default function LoginScreen() {
     return (
         <PaperProvider>
             <ThemedView style={styles.container}>
-                <Image source={require("../../assets/images/icon.png")} style={styles.logo} />
-                <Text style={styles.title}>Welcome Back!</Text>
-                <Text style={styles.subtitle}>Log in to continue</Text>
+                <Image source={require("../../assets/images/switter1.png")} style={styles.logo} />
+                <Text style={styles.title}>Welcome to Switter!</Text>
+                <Text style={styles.subtitle}>Log in to your account</Text>
                 <TextInput
                     style={styles.input}
                     placeholder="Username"
+                    placeholderTextColor="#8899A6"
                     value={username}
                     onChangeText={setUsername}
                     autoCapitalize="none"
@@ -54,6 +56,7 @@ export default function LoginScreen() {
                 <TextInput
                     style={styles.input}
                     placeholder="Password"
+                    placeholderTextColor="#8899A6"
                     value={password}
                     onChangeText={setPassword}
                     secureTextEntry
@@ -86,7 +89,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         padding: 16,
-        backgroundColor: "#f9f9f9",
+        backgroundColor: "#15202B",
     },
     logo: {
         width: 150,
@@ -98,34 +101,35 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: "bold",
         marginBottom: 8,
-        color: "#333",
+        color: "#FFFFFF",
     },
     subtitle: {
         fontSize: 16,
         marginBottom: 24,
-        color: "#666",
+        color: "#8899A6",
     },
     input: {
         width: "100%",
         height: 48,
-        borderColor: "#ccc",
+        borderColor: "#38444D",
         borderWidth: 1,
-        borderRadius: 8,
+        borderRadius: 24,
         paddingHorizontal: 12,
         marginBottom: 16,
-        backgroundColor: "#fff",
+        backgroundColor: "#192734",
+        color: "#FFFFFF",
     },
     loginButton: {
         width: "100%",
         height: 48,
-        backgroundColor: "#007BFF",
-        borderRadius: 8,
+        backgroundColor: "#1DA1F2",
+        borderRadius: 24,
         justifyContent: "center",
         alignItems: "center",
         marginBottom: 16,
     },
     loginButtonText: {
-        color: "#fff",
+        color: "#FFFFFF",
         fontSize: 16,
         fontWeight: "600",
     },
@@ -133,13 +137,13 @@ const styles = StyleSheet.create({
         width: "100%",
         height: 48,
         borderWidth: 1,
-        borderColor: "#007BFF",
-        borderRadius: 8,
+        borderColor: "#1DA1F2",
+        borderRadius: 24,
         justifyContent: "center",
         alignItems: "center",
     },
     registerButtonText: {
-        color: "#007BFF",
+        color: "#1DA1F2",
         fontSize: 16,
         fontWeight: "600",
     },

@@ -28,11 +28,12 @@ export default function RegisterScreen() {
     return (
         <PaperProvider>
             <ThemedView style={styles.container}>
-                <Text style={styles.title}>Create an Account</Text>
-                <Text style={styles.subtitle}>Join us and get started</Text>
+                <Text style={styles.title}>Create your Account</Text>
+                <Text style={styles.subtitle}>Sign in to Switter!</Text>
                 <TextInput
                     style={styles.input}
                     placeholder="Username"
+                    placeholderTextColor="#8899A6"
                     value={username}
                     onChangeText={setUsername}
                     autoCapitalize="none"
@@ -40,6 +41,7 @@ export default function RegisterScreen() {
                 <TextInput
                     style={styles.input}
                     placeholder="Email"
+                    placeholderTextColor="#8899A6"
                     value={email}
                     onChangeText={setEmail}
                     keyboardType="email-address"
@@ -48,6 +50,7 @@ export default function RegisterScreen() {
                 <TextInput
                     style={styles.input}
                     placeholder="Password"
+                    placeholderTextColor="#8899A6"
                     value={password}
                     onChangeText={setPassword}
                     secureTextEntry
@@ -80,40 +83,41 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         padding: 16,
-        backgroundColor: "#f9f9f9",
+        backgroundColor: "#15202B",
     },
     title: {
         fontSize: 24,
         fontWeight: "bold",
         marginBottom: 24,
-        color: "#333",
+        color: "#FFFFFF",
     },
     subtitle: {
         fontSize: 16,
-        color: "#666",
+        color: "#8899A6",
         marginBottom: 24,
     },
     input: {
         width: "100%",
         height: 48,
-        borderColor: "#ccc",
+        borderColor: "#38444D",
         borderWidth: 1,
-        borderRadius: 8,
+        borderRadius: 24,
         paddingHorizontal: 12,
         marginBottom: 16,
-        backgroundColor: "#fff",
+        backgroundColor: "#192734",
+        color: "#FFFFFF",
     },
     registerButton: {
         width: "100%",
         height: 48,
-        backgroundColor: "#007BFF",
-        borderRadius: 8,
+        backgroundColor: "#1DA1F2",
+        borderRadius: 24,
         justifyContent: "center",
         alignItems: "center",
         marginBottom: 16,
     },
     registerButtonText: {
-        color: "#fff",
+        color: "#FFFFFF",
         fontSize: 16,
         fontWeight: "600",
     },
@@ -121,13 +125,13 @@ const styles = StyleSheet.create({
         width: "100%",
         height: 48,
         borderWidth: 1,
-        borderColor: "#007BFF",
-        borderRadius: 8,
+        borderColor: "#1DA1F2",
+        borderRadius: 24,
         justifyContent: "center",
         alignItems: "center",
     },
     loginButtonText: {
-        color: "#007BFF",
+        color: "#1DA1F2",
         fontSize: 16,
         fontWeight: "600",
     },
